@@ -13,9 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
+// EXEMPLO DE LOGIN COM API
 Route::post('/auth/login', 'Auth\LoginController@ajax_post_login');
+
+// EXEMPLO DE ROTA COM MIDDLEWARE DE AUTENTICAÇÃO JWT
+Route::group(['middleware' => ['jwt.auth']], function(){
+    Route::get('/user', 'UsuarioController@ajax_get_user');
+});

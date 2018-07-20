@@ -40,7 +40,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('ajax_get_logout');
     }
 
     public function ajax_post_login(Request $request)
@@ -63,7 +63,7 @@ class LoginController extends Controller
         }
         else
         {
-            if(Auth::attempt($credenciais, false))
+            if(Auth::attempt(['email' => $credenciais['email'], 'password' => $credenciais['senha']]))
             {
                 $token = JWTAuth::fromUser(Auth::user());
 

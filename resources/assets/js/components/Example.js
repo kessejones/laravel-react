@@ -1,44 +1,47 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 
-import Layout from './Layout'
+import {
+    Navbar, NavItem, Nav, Collapse, NavLink, NavbarToggler
+} from 'reactstrap';
 
 export default class Example extends Component {
+    
     constructor(props){
         super(props);
-        this.state = { 
-            count: 0,
-            text: ''
+
+        this.state = {
+            toggle: true
         }
+
+        this.toggle = this.toggle.bind(this);
     }
+
+    toggle(){
+        this.setState({
+            toggle: !this.state.toggle
+        });
+    }
+
     render() {
         return (
-           <Layout>
-               <h4>{this.state.count}</h4>
-               <button className="btn btn-success"
-               onClick={() => {
-                   this.setState({count: this.state.count - 1});
-               }}>-</button>
-               <button className="btn btn-primary"
-               onClick={() => {
-                   this.setState({count: this.state.count + 1});
-               }}>+</button>
-               <hr/>
-
-               <label htmlFor="">{this.state.text}</label>
-               <br/>
-               <input type="text" onChange={(e) => {
-                   this.setState({
-                       text: e.target.value
-                   });
-               }}
-               value={
-                   this.state.text
-               }/>
-
-               <Link to="/login" >LOGIN</Link>
-           </Layout>
+           <div>
+               <Navbar color="light" light expand="md">
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.toggle}>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="/">Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/">Página 1</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/">Página 2</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+               </Navbar>
+           </div>
         );
     }
 }
