@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 
-export default class Login extends Component {
+export default class Home extends Component {
     constructor(props){
         super(props);
     }
